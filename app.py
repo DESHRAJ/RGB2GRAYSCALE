@@ -1,8 +1,8 @@
 import cv2
 import cvfy
-​
+
 app = cvfy.register('gh:107.170.77.168:62213840:3000:8004')
-​
+
 @cvfy.crossdomain
 @app.listen()
 def grayscale():
@@ -11,7 +11,7 @@ def grayscale():
     
     image_1_path = all_image_paths[0]
         
-    cvfy.sendTextArrayToTerminal(['Loading Image...']);
+    cvfy.sendTextArrayToTerminal(['Loading Image...'])
     image_1 = cv2.imread(image_1_path)
 
     cvfy.sendTextArrayToTerminal(['Image Loaded successfully']);
