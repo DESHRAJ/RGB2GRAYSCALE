@@ -41,7 +41,7 @@ def validateTOKEN(function_name):
     except Exception as e:
         if (e.__class__.__name__ == 'AssertionError'):
             raise ValueError("cvfy [Error Code: 003] => Malformed Token")
-            
+
 def validate_socket_id(request):
     try:
         if not request.form['socket-id']:
@@ -55,7 +55,7 @@ def validate_socket_id(request):
 
 def crossdomain(*args, **kwargs):
     return (cross_origin)
-    
+
 ####################
 ## app decorators ##
 ####################
@@ -72,11 +72,11 @@ def override_run(TOKEN):
         print ("running on port: {}".format(TOKEN.split(':')[4]))
         IOLoop.instance().start()
     return (wrapper)
-    
+
 ##################
 ## app register ##
 ##################
-    
+
 def register(APP_TOKEN):
     global TOKEN
     TOKEN = APP_TOKEN
@@ -92,12 +92,12 @@ def register(APP_TOKEN):
     app.listen = override_route(app.route)
     app.run = override_run(TOKEN)
     return (app)
- 
- 
+
+
 ########################
 ## pipeline functions ##
 ########################
-    
+
 def transformToLocalPath(image_object_array):
     path_to_use = '/tmp/{}/'.format(random.randint(1, 1000000))
     subprocess.Popen('mkdir -p {}'.format(path_to_use), shell=True).wait()
@@ -112,7 +112,7 @@ def transformToLocalPath(image_object_array):
         with open(path_to_use + str(index) + extension, 'wb') as file:
             file.write(image_object.read())
     return (array_of_paths_to_send_back)
-    
+
 #####################
 ## input functions ##
 #####################
@@ -128,7 +128,7 @@ def getTextArray():
     except Exception as e:
         pass
     return (textdata)
-    
+
 def getImageArray():
     validateTOKEN(sys._getframe().f_code.co_name)    
     imagedata = []
@@ -140,9 +140,7 @@ def getImageArray():
     except Exception as e:
         pass
     return (transformToLocalPath(imagedata))
-            
-        
-        
+
 ######################
 ## output functions ##
 ######################
@@ -181,7 +179,7 @@ def sendTextArray(data):
     except Exception as e:
         if (e.__class__.__name__ == 'ConnectionError'):
             raise Exception("cvfy [Error Code: 010] => Connection Error")
-            
+
 def sendImageArray(data, mode):
     validateTOKEN(sys._getframe().f_code.co_name)
     validate_socket_id(request)
@@ -248,4 +246,4 @@ def sendImageArray(data, mode):
 
     except Exception as e:
         if (e.__class__.__name__ == 'ConnectionError'):
-            raise Exception("cvfy [Error Code: 010] => Connection Error")     
+            raise Exception("cvfy [Error Code: 010] => Connection Error")
