@@ -1,7 +1,7 @@
 import cv2
 import cvfy
 ​
-app = cvfy.register('')
+app = cvfy.register('gh:107.170.77.168:62213840:3000:8004')
 ​
 @cvfy.crossdomain
 @app.listen()
